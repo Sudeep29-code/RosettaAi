@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosetta AI — Cross-Lingual Code Translation Engine</title>
+  
+  <!-- Tailwind CSS & Google Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Prism.js Syntax Highlighting (Light GitHub Theme) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #F8FAFC;
+      color: #0F172A;
+      font-family: 'Inter', sans-serif;
+    }
+    .code-font {
+      font-family: 'Fira Code', monospace;
+    }
+    textarea {
+      tab-size: 4;
+    }
+    pre[class*="language-"] {
+      margin: 0 !important;
+      background: transparent !important;
+      padding: 1.25rem !important;
+      font-size: 0.875rem !important;
+      line-height: 1.6 !important;
+      font-family: 'Fira Code', monospace !important;
+    }
+    code[class*="language-"] {
+      font-family: 'Fira Code', monospace !important;
+      color: #0F172A !important;
+      text-shadow: none !important;
+    }
+    .token.keyword { color: #6366F1 !important; font-weight: 600; }
+    .token.string { color: #059669 !important; }
+    .token.number { color: #D97706 !important; }
+    .token.function { color: #2563EB !important; }
+    .token.comment { color: #94A3B8 !important; font-style: italic; }
+    .token.operator { color: #0F172A !important; }
+    .token.class-name { color: #7C3AED !important; font-weight: 600; }
+
+    .white-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+    }
+    .white-card-hover:hover {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- Header / Navigation Bar (Clean Professional Light) -->
+  <header class="border-b border-slate-200 bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center shadow-md shadow-indigo-500/20">
+          <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="text-xl font-extrabold tracking-tight text-slate-900">Rosetta<span class="text-indigo-600">AI</span></span>
+            <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">v2.0</span>
+          </div>
+          <p class="text-xs text-slate-500 font-medium">Cross-Lingual Code Understanding & Translation</p>
+        </div>
+      </div>
+
+      <!-- Status & Links -->
+      <div class="flex items-center space-x-3">
+        <div class="hidden sm:flex items-center space-x-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-medium text-slate-700">
+          <span class="flex h-2 w-2 relative">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span>Engine Active</span>
+        </div>
+
+        <a href="/docs" target="_blank" class="flex items-center space-x-1.5 text-xs text-slate-600 hover:text-slate-900 bg-slate-50 hover:bg-slate-100 px-3 py-1.5 rounded-xl transition border border-slate-200 font-medium">
+          <i data-lucide="file-text" class="w-4 h-4 text-indigo-600"></i>
+          <span>Swagger API</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+    <!-- Dual-Pane Code Editor Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- LEFT: SOURCE CODE PANEL -->
+      <div class="white-card rounded-2xl overflow-hidden flex flex-col shadow-sm">
+        <!-- Panel Header -->
+        <div class="bg-slate-50 px-4 py-3 border-b border-slate-200 flex items-center justify-between flex-wrap gap-2">
+          <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-1.5">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Source:</span>
+              <select id="sourceLang" onchange="onSourceLangChange()" class="bg-white text-sm font-semibold text-slate-800 rounded-lg px-2.5 py-1 border border-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer shadow-sm">
+                <option value="python" selected>Python</option>
+                <option value="java">Java</option>
+                <option value="cpp">C++</option>
+                <option value="javascript">JavaScript</option>
+              </select>
+            </div>
+
+            <div class="flex items-center space-x-1.5">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Preset:</span>
+              <select id="presetSelect" onchange="loadPreset()" class="bg-white text-xs font-semibold text-slate-700 rounded-lg px-2.5 py-1 border border-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer shadow-sm">
+                <option value="count_words">Word Frequency</option>
+                <option value="two_sum">Two Sum</option>
+                <option value="is_palindrome">Palindrome</option>
+                <option value="binary_search">Binary Search</option>
+                <option value="factorial">Factorial</option>
+                <option value="fizz_buzz">FizzBuzz</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-1.5">
+            <button onclick="clearSourceCode()" class="text-slate-400 hover:text-red-500 p-1.5 rounded-lg hover:bg-slate-100 transition" title="Clear Code">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+            <button onclick="swapLanguages()" class="text-slate-500 hover:text-indigo-600 p-1.5 rounded-lg hover:bg-slate-100 transition flex items-center space-x-1 text-xs font-medium" title="Swap Languages">
+              <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+              <span class="hidden sm:inline">Swap</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Code Input Textarea -->
+        <div class="relative flex-1 min-h-[380px] bg-slate-50/50">
+          <textarea id="sourceCode" spellcheck="false" placeholder="Write or paste your source code here..."
+            class="w-full h-full p-4 bg-transparent code-font text-sm text-slate-900 focus:outline-none resize-none leading-relaxed"
+            oninput="autoResize(this)"></textarea>
+        </div>
+
+        <!-- Bottom Action Bar -->
+        <div class="bg-white px-4 py-3 border-t border-slate-200 flex items-center justify-between flex-wrap gap-2">
+          <span class="text-xs text-slate-500 font-mono font-medium" id="sourceLineCount">Lines: 13</span>
+          <div class="flex items-center space-x-2">
+            <button id="optimizeBtn" onclick="runOptimization()" class="flex items-center space-x-1.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-md shadow-orange-500/20 transition-all transform active:scale-95">
+              <i data-lucide="zap" class="w-4 h-4 fill-current"></i>
+              <span>Optimize Code</span>
+            </button>
+            <button id="translateBtn" onclick="runTranslation()" class="flex items-center space-x-1.5 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-5 py-2 rounded-xl text-sm font-bold shadow-md shadow-indigo-500/20 transition-all transform active:scale-95">
+              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+              <span>Translate Code</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: TARGET TRANSLATION PANEL -->
+      <div class="white-card rounded-2xl overflow-hidden flex flex-col shadow-sm">
+        <!-- Panel Header -->
+        <div class="bg-slate-50 px-4 py-3 border-b border-slate-200 flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Target:</span>
+            <select id="targetLang" class="bg-white text-sm font-semibold text-slate-800 rounded-lg px-3 py-1 border border-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer shadow-sm">
+              <option value="java" selected>Java</option>
+              <option value="cpp">C++</option>
+              <option value="javascript">JavaScript</option>
+              <option value="python">Python</option>
+            </select>
+          </div>
+
+          <div class="flex items-center space-x-1.5">
+            <button onclick="copyOutputCode()" id="copyBtn" class="text-slate-500 hover:text-emerald-600 p-1.5 rounded-lg hover:bg-slate-100 transition flex items-center space-x-1 text-xs font-medium" title="Copy Translated Code">
+              <i data-lucide="copy" class="w-4 h-4"></i>
+              <span id="copyLabel">Copy</span>
+            </button>
+            <button onclick="downloadCode()" class="text-slate-500 hover:text-indigo-600 p-1.5 rounded-lg hover:bg-slate-100 transition flex items-center space-x-1 text-xs font-medium" title="Download File">
+              <i data-lucide="download" class="w-4 h-4"></i>
+              <span>Save</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Code Output Container -->
+        <div class="relative flex-1 min-h-[380px] bg-white overflow-auto">
+          <div id="loadingOverlay" class="hidden absolute inset-0 bg-white/85 backdrop-blur-sm z-20 flex flex-col items-center justify-center space-y-3">
+            <div class="w-9 h-9 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
+            <p id="loadingText" class="text-xs text-slate-700 font-semibold">Translating cross-lingual representation...</p>
+          </div>
+
+          <pre class="w-full h-full language-java" id="outputPre"><code class="language-java" id="outputCode">// Code will appear here after clicking 'Translate' or 'Optimize'</code></pre>
+        </div>
+
+        <!-- Translation Metadata Badges -->
+        <div class="bg-slate-50 px-4 py-3 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+          <div class="flex items-center space-x-2">
+            <span id="badgeStrategy" class="px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-600 border border-slate-200 font-medium">Strategy: None</span>
+            <span id="badgeSyntax" class="px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-600 border border-slate-200 font-medium">Syntax: Pending</span>
+            <span id="badgeVerifier" class="hidden px-2.5 py-0.5 rounded-lg bg-purple-50 text-purple-700 border border-purple-200 font-bold flex items-center gap-1"><i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-600"></i> AI Verified</span>
+          </div>
+          <span class="text-slate-500 font-mono font-medium" id="outputLineCount">Lines: 0</span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 py-4 text-center text-xs text-slate-500 bg-white">
+    <p>Rosetta AI — Cross-Lingual Code Understanding & Translation System &copy; 2026</p>
+  </footer>
+
+  <!-- Script Logic -->
+  <script>
+    lucide.createIcons();
+
+    let currentStrategy = 'hybrid';
+
+    const PRESETS = {
+      count_words: {
+        lang: 'python',
+        code: `def count_words(text):
+    words = text.lower().split()
+    frequency = {}
+
+    for word in words:
+        frequency[word] = frequency.get(word, 0) + 1
+
+    return frequency
+
+
+text = "Python is fun and Python is powerful"
+
+result = count_words(text)
+
+print(result)`
+      },
+      two_sum: {
+        lang: 'python',
+        code: `def two_sum(nums, target):
+    lookup = {}
+    for i in range(len(nums)):
+        diff = target - nums[i]
+        if diff in lookup:
+            return [lookup[diff], i]
+        lookup[nums[i]] = i
+    return []`
+      },
+      is_palindrome: {
+        lang: 'python',
+        code: `def is_palindrome(s):
+    clean = s.lower()
+    left = 0
+    right = len(clean) - 1
+    while left < right:
+        if clean[left] != clean[right]:
+            return False
+        left = left + 1
+        right = right - 1
+    return True`
+      },
+      binary_search: {
+        lang: 'python',
+        code: `def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1`
+      },
+      factorial: {
+        lang: 'python',
+        code: `def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)`
+      },
+      fizz_buzz: {
+        lang: 'python',
+        code: `def fizz_buzz(n):
+    result = []
+    for i in range(1, n + 1):
+        if i % 15 == 0:
+            result.append("FizzBuzz")
+        elif i % 3 == 0:
+            result.append("Fizz")
+        elif i % 5 == 0:
+            result.append("Buzz")
+        else:
+            result.append(str(i))
+    return result`
+      }
+    };
+
+    function loadPreset() {
+      const presetKey = document.getElementById('presetSelect').value;
+      if (PRESETS[presetKey]) {
+        document.getElementById('sourceLang').value = PRESETS[presetKey].lang;
+        document.getElementById('sourceCode').value = PRESETS[presetKey].code;
+        updateLineCounts();
+      }
+    }
+
+    function setStrategy(strat) {
+      currentStrategy = strat;
+      ['hybrid', 'ast', 'neural', 'rules'].forEach(s => {
+        const btn = document.getElementById(`btn-strat-${s}`);
+        if (s === strat) {
+          btn.className = 'px-3 py-1 text-xs font-semibold rounded-lg bg-indigo-600 text-white shadow-sm transition';
+        } else {
+          btn.className = 'px-3 py-1 text-xs font-medium rounded-lg text-slate-600 hover:text-slate-900 transition';
+        }
+      });
+    }
+
+    function onSourceLangChange() {
+      updateLineCounts();
+    }
+
+    function clearSourceCode() {
+      document.getElementById('sourceCode').value = '';
+      updateLineCounts();
+    }
+
+    function swapLanguages() {
+      const srcSelect = document.getElementById('sourceLang');
+      const tgtSelect = document.getElementById('targetLang');
+      const tempLang = srcSelect.value;
+      srcSelect.value = tgtSelect.value;
+      tgtSelect.value = tempLang;
+
+      const outputCode = document.getElementById('outputCode').textContent;
+      if (outputCode && !outputCode.startsWith('// Translated code')) {
+        document.getElementById('sourceCode').value = outputCode;
+      }
+      updateLineCounts();
+    }
+
+    function updateLineCounts() {
+      const srcText = document.getElementById('sourceCode').value;
+      const srcLines = srcText ? srcText.split('\n').length : 0;
+      document.getElementById('sourceLineCount').textContent = `Lines: ${srcLines}`;
+
+      const outText = document.getElementById('outputCode').textContent;
+      const outLines = (outText && !outText.startsWith('//')) ? outText.split('\n').length : 0;
+      document.getElementById('outputLineCount').textContent = `Lines: ${outLines}`;
+    }
+
+    function autoResize(textarea) {
+      updateLineCounts();
+    }
+
+    async function executeCode(optimize = false) {
+      const code = document.getElementById('sourceCode').value.trim();
+      if (!code) {
+        alert('Please enter or select code first.');
+        return;
+      }
+
+      const sourceLang = document.getElementById('sourceLang').value;
+      const targetLang = document.getElementById('targetLang').value;
+
+      const loadingTextEl = document.getElementById('loadingText');
+      if (loadingTextEl) {
+        loadingTextEl.textContent = optimize
+          ? `Optimizing time & space complexity in ${targetLang.toUpperCase()}...`
+          : `Translating faithfully into ${targetLang.toUpperCase()}...`;
+      }
+      document.getElementById('loadingOverlay').classList.remove('hidden');
+
+      try {
+        const endpoint = optimize ? '/optimize' : '/translate';
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            code: code,
+            source_language: sourceLang,
+            target_language: targetLang,
+            strategy: 'hybrid',
+            refactor: true,
+            use_ai_verifier: true,
+            optimize: optimize
+          })
+        });
+
+        if (!response.ok) {
+          const err = await response.json();
+          throw new Error(err.detail || 'Execution failed.');
+        }
+
+        const data = await response.json();
+        
+        // Display translated/optimized code
+        const outputCodeEl = document.getElementById('outputCode');
+        const outputPreEl = document.getElementById('outputPre');
+        
+        outputCodeEl.textContent = data.translated_code;
+        
+        // Syntax highlighting mapping
+        const langMap = { python: 'python', java: 'java', cpp: 'cpp', javascript: 'javascript' };
+        const prismLang = langMap[targetLang] || 'javascript';
+        
+        outputCodeEl.className = `language-${prismLang}`;
+        outputPreEl.className = `w-full h-full language-${prismLang}`;
+        Prism.highlightElement(outputCodeEl);
+
+        // Update badges
+        const badgeStrat = document.getElementById('badgeStrategy');
+        if (badgeStrat) {
+          badgeStrat.textContent = optimize ? 'Strategy: AI Optimizer' : `Strategy: ${data.strategy_used}`;
+          badgeStrat.className = optimize
+            ? 'px-2.5 py-0.5 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 font-bold'
+            : 'px-2.5 py-0.5 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-200 font-bold';
+        }
+
+        const badgeSyntax = document.getElementById('badgeSyntax');
+        if (badgeSyntax) {
+          if (data.syntax_valid) {
+            badgeSyntax.textContent = 'Syntax: Valid';
+            badgeSyntax.className = 'px-2.5 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold';
+          } else {
+            badgeSyntax.textContent = 'Syntax: Check';
+            badgeSyntax.className = 'px-2.5 py-0.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 font-bold';
+          }
+        }
+
+        const badgeVerifier = document.getElementById('badgeVerifier');
+        if (badgeVerifier) {
+          if (data.ai_verified) {
+            badgeVerifier.classList.remove('hidden');
+            badgeVerifier.innerHTML = optimize
+              ? '<i data-lucide="zap" class="w-3.5 h-3.5 text-amber-600"></i> AI Optimized'
+              : '<i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-600"></i> AI Verified';
+            badgeVerifier.className = optimize
+              ? 'px-2.5 py-0.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 font-bold flex items-center gap-1'
+              : 'px-2.5 py-0.5 rounded-lg bg-purple-50 text-purple-700 border border-purple-200 font-bold flex items-center gap-1';
+          } else {
+            badgeVerifier.classList.add('hidden');
+          }
+        }
+        lucide.createIcons();
+
+        updateLineCounts();
+
+      } catch (err) {
+        alert('Error: ' + err.message);
+      } finally {
+        document.getElementById('loadingOverlay').classList.add('hidden');
+      }
+    }
+
+    function runTranslation() {
+      executeCode(false);
+    }
+
+    function runOptimization() {
+      executeCode(true);
+    }
+
+    function copyOutputCode() {
+      const code = document.getElementById('outputCode').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        const label = document.getElementById('copyLabel');
+        label.textContent = 'Copied!';
+        setTimeout(() => { label.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    function downloadCode() {
+      const code = document.getElementById('outputCode').textContent;
+      const targetLang = document.getElementById('targetLang').value;
+      const extMap = { python: 'py', java: 'java', cpp: 'cpp', javascript: 'js' };
+      const ext = extMap[targetLang] || 'txt';
+      
+      const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `translated_solution.${ext}`;
+      a.click();
+    }
+
+    // Keyboard shortcut (Ctrl+Enter / Cmd+Enter) to translate
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        runTranslation();
+      }
+    });
+
+    // Initial preset load
+    loadPreset();
+  </script>
+</body>
+</html>

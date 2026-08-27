@@ -1,0 +1,95 @@
+{
+  "builder_name": "parquet",
+  "citation": "",
+  "config_name": "java",
+  "dataset_name": "code_search_net",
+  "dataset_size": 1554005444,
+  "description": "",
+  "download_size": 425659927,
+  "features": {
+    "repository_name": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "func_path_in_repository": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "func_name": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "whole_func_string": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "language": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "func_code_string": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "func_code_tokens": {
+      "feature": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "_type": "List"
+    },
+    "func_documentation_string": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "func_documentation_tokens": {
+      "feature": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "_type": "List"
+    },
+    "split_name": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "func_code_url": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 1979665371,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 1429270143,
+      "num_examples": 454451,
+      "shard_lengths": [
+        149000,
+        165000,
+        140451
+      ],
+      "dataset_name": "code_search_net"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 82377090,
+      "num_examples": 26909,
+      "dataset_name": "code_search_net"
+    },
+    "validation": {
+      "name": "validation",
+      "num_bytes": 42358211,
+      "num_examples": 15328,
+      "dataset_name": "code_search_net"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

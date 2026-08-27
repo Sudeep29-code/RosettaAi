@@ -1,0 +1,63 @@
+{
+  "builder_name": "parquet",
+  "citation": "",
+  "config_name": "humaneval-cpp",
+  "dataset_name": "multi_pl-e",
+  "dataset_size": 245061,
+  "description": "",
+  "download_size": 83221,
+  "features": {
+    "name": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "language": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "prompt": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "doctests": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "original": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "prompt_terminology": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "tests": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "stop_tokens": {
+      "feature": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "_type": "List"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 328282,
+  "splits": {
+    "test": {
+      "name": "test",
+      "num_bytes": 245061,
+      "num_examples": 161,
+      "dataset_name": "multi_pl-e"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

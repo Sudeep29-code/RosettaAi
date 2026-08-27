@@ -1,0 +1,58 @@
+{
+  "builder_name": "json",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "cpp-code-code_search_net-style",
+  "dataset_size": 97722871,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/malteklaes/cpp-code-code_search_net-style@d2dca23d0131d3b0bd79ba255fa014a30c8b2949/cpp_dataset/train/train.jsonl": {
+      "num_bytes": 70894313,
+      "checksum": null
+    },
+    "hf://datasets/malteklaes/cpp-code-code_search_net-style@d2dca23d0131d3b0bd79ba255fa014a30c8b2949/cpp_dataset/test/test.jsonl": {
+      "num_bytes": 14184279,
+      "checksum": null
+    },
+    "hf://datasets/malteklaes/cpp-code-code_search_net-style@d2dca23d0131d3b0bd79ba255fa014a30c8b2949/cpp_dataset/validation/validation.jsonl": {
+      "num_bytes": 14184279,
+      "checksum": null
+    }
+  },
+  "download_size": 99262871,
+  "features": {
+    "func_code_string": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 196985742,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 69794313,
+      "num_examples": 50000,
+      "dataset_name": "cpp-code-code_search_net-style"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 13964279,
+      "num_examples": 10000,
+      "dataset_name": "cpp-code-code_search_net-style"
+    },
+    "validation": {
+      "name": "validation",
+      "num_bytes": 13964279,
+      "num_examples": 10000,
+      "dataset_name": "cpp-code-code_search_net-style"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

@@ -1,0 +1,35 @@
+# Environment variables & Secrets (CRITICAL)
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+*.token
+
+# Python & Virtual Environments
+venv/
+env/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Trained Models & Checkpoints
+*.pth
+*.pt
+*.bin
+transformer/*.pth
+
+# Datasets (Large files)
+datasets/humaneval_x/
+*.jsonl.gz
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+

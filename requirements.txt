@@ -1,0 +1,13 @@
+torch
+torch-geometric
+transformers
+numpy
+tree-sitter
+tree-sitter-cpp
+tree-sitter-java
+tree-sitter-javascript
+datasets
+tqdm
+scikit-learn
+fastapi
+uvicorn

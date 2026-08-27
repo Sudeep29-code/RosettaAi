@@ -1,0 +1,121 @@
+[
+    {
+        "algorithm": "factorial",
+        "python": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)",
+        "java": "static int factorial(int n) {\n    if (n == 0) {\n        return 1;\n    }\n    return n * factorial(n - 1);\n}",
+        "cpp": "int factorial(int n) {\n    if (n == 0) {\n        return 1;\n    }\n    return n * factorial(n - 1);\n}",
+        "javascript": "function factorial(n) {\n    if (n === 0) {\n        return 1;\n    }\n    return n * factorial(n - 1);\n}"
+    },
+    {
+        "algorithm": "fibonacci",
+        "python": "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n - 1) + fibonacci(n - 2)",
+        "java": "static int fibonacci(int n) {\n    if (n <= 1) {\n        return n;\n    }\n    return fibonacci(n - 1) + fibonacci(n - 2);\n}",
+        "cpp": "int fibonacci(int n) {\n    if (n <= 1) {\n        return n;\n    }\n    return fibonacci(n - 1) + fibonacci(n - 2);\n}",
+        "javascript": "function fibonacci(n) {\n    if (n <= 1) {\n        return n;\n    }\n    return fibonacci(n - 1) + fibonacci(n - 2);\n}"
+    },
+    {
+        "algorithm": "fibonacci_iterative",
+        "python": "def fibonacci_iterative(n):\n    if n <= 1:\n        return n\n    a = 0\n    b = 1\n    for i in range(2, n + 1):\n        temp = a + b\n        a = b\n        b = temp\n    return b",
+        "java": "static int fibonacciIterative(int n) {\n    if (n <= 1) {\n        return n;\n    }\n    int a = 0;\n    int b = 1;\n    for (int i = 2; i <= n; i++) {\n        int temp = a + b;\n        a = b;\n        b = temp;\n    }\n    return b;\n}",
+        "cpp": "int fibonacciIterative(int n) {\n    if (n <= 1) {\n        return n;\n    }\n    int a = 0;\n    int b = 1;\n    for (int i = 2; i <= n; i++) {\n        int temp = a + b;\n        a = b;\n        b = temp;\n    }\n    return b;\n}",
+        "javascript": "function fibonacciIterative(n) {\n    if (n <= 1) {\n        return n;\n    }\n    let a = 0;\n    let b = 1;\n    for (let i = 2; i <= n; i++) {\n        let temp = a + b;\n        a = b;\n        b = temp;\n    }\n    return b;\n}"
+    },
+    {
+        "algorithm": "gcd",
+        "python": "def gcd(a, b):\n    while b != 0:\n        temp = a\n        a = b\n        b = temp % b\n    return a",
+        "java": "static int gcd(int a, int b) {\n    while (b != 0) {\n        int temp = a;\n        a = b;\n        b = temp % b;\n    }\n    return a;\n}",
+        "cpp": "int gcd(int a, int b) {\n    while (b != 0) {\n        int temp = a;\n        a = b;\n        b = temp % b;\n    }\n    return a;\n}",
+        "javascript": "function gcd(a, b) {\n    while (b !== 0) {\n        let temp = a;\n        a = b;\n        b = temp % b;\n    }\n    return a;\n}"
+    },
+    {
+        "algorithm": "lcm",
+        "python": "def lcm(a, b):\n    return (a * b) // gcd(a, b)",
+        "java": "static int lcm(int a, int b) {\n    return (a * b) / gcd(a, b);\n}",
+        "cpp": "int lcm(int a, int b) {\n    return (a * b) / gcd(a, b);\n}",
+        "javascript": "function lcm(a, b) {\n    return Math.floor((a * b) / gcd(a, b));\n}"
+    },
+    {
+        "algorithm": "is_prime",
+        "python": "def is_prime(n):\n    if n <= 1:\n        return False\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return False\n    return True",
+        "java": "static boolean isPrime(int n) {\n    if (n <= 1) {\n        return false;\n    }\n    for (int i = 2; i <= (int) Math.sqrt(n); i++) {\n        if (n % i == 0) {\n            return false;\n        }\n    }\n    return true;\n}",
+        "cpp": "bool isPrime(int n) {\n    if (n <= 1) {\n        return false;\n    }\n    for (int i = 2; i * i <= n; i++) {\n        if (n % i == 0) {\n            return false;\n        }\n    }\n    return true;\n}",
+        "javascript": "function isPrime(n) {\n    if (n <= 1) {\n        return false;\n    }\n    for (let i = 2; i <= Math.sqrt(n); i++) {\n        if (n % i === 0) {\n            return false;\n        }\n    }\n    return true;\n}"
+    },
+    {
+        "algorithm": "binary_search",
+        "python": "def binary_search(arr, target):\n    low = 0\n    high = len(arr) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return -1",
+        "java": "static int binarySearch(int[] arr, int target) {\n    int low = 0;\n    int high = arr.length - 1;\n    while (low <= high) {\n        int mid = (low + high) / 2;\n        if (arr[mid] == target) {\n            return mid;\n        } else if (arr[mid] < target) {\n            low = mid + 1;\n        } else {\n            high = mid - 1;\n        }\n    }\n    return -1;\n}",
+        "cpp": "int binarySearch(int arr[], int n, int target) {\n    int low = 0;\n    int high = n - 1;\n    while (low <= high) {\n        int mid = (low + high) / 2;\n        if (arr[mid] == target) {\n            return mid;\n        } else if (arr[mid] < target) {\n            low = mid + 1;\n        } else {\n            high = mid - 1;\n        }\n    }\n    return -1;\n}",
+        "javascript": "function binarySearch(arr, target) {\n    let low = 0;\n    let high = arr.length - 1;\n    while (low <= high) {\n        let mid = Math.floor((low + high) / 2);\n        if (arr[mid] === target) {\n            return mid;\n        } else if (arr[mid] < target) {\n            low = mid + 1;\n        } else {\n            high = mid - 1;\n        }\n    }\n    return -1;\n}"
+    },
+    {
+        "algorithm": "linear_search",
+        "python": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1",
+        "java": "static int linearSearch(int[] arr, int target) {\n    for (int i = 0; i < arr.length; i++) {\n        if (arr[i] == target) {\n            return i;\n        }\n    }\n    return -1;\n}",
+        "cpp": "int linearSearch(int arr[], int n, int target) {\n    for (int i = 0; i < n; i++) {\n        if (arr[i] == target) {\n            return i;\n        }\n    }\n    return -1;\n}",
+        "javascript": "function linearSearch(arr, target) {\n    for (let i = 0; i < arr.length; i++) {\n        if (arr[i] === target) {\n            return i;\n        }\n    }\n    return -1;\n}"
+    },
+    {
+        "algorithm": "bubble_sort",
+        "python": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(0, n - i - 1):\n            if arr[j] > arr[j + 1]:\n                temp = arr[j]\n                arr[j] = arr[j + 1]\n                arr[j + 1] = temp\n    return arr",
+        "java": "static void bubbleSort(int[] arr) {\n    int n = arr.length;\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < n - i - 1; j++) {\n            if (arr[j] > arr[j + 1]) {\n                int temp = arr[j];\n                arr[j] = arr[j + 1];\n                arr[j + 1] = temp;\n            }\n        }\n    }\n}",
+        "cpp": "void bubbleSort(int arr[], int n) {\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < n - i - 1; j++) {\n            if (arr[j] > arr[j + 1]) {\n                int temp = arr[j];\n                arr[j] = arr[j + 1];\n                arr[j + 1] = temp;\n            }\n        }\n    }\n}",
+        "javascript": "function bubbleSort(arr) {\n    let n = arr.length;\n    for (let i = 0; i < n; i++) {\n        for (let j = 0; j < n - i - 1; j++) {\n            if (arr[j] > arr[j + 1]) {\n                let temp = arr[j];\n                arr[j] = arr[j + 1];\n                arr[j + 1] = temp;\n            }\n        }\n    }\n    return arr;\n}"
+    },
+    {
+        "algorithm": "selection_sort",
+        "python": "def selection_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        min_idx = i\n        for j in range(i + 1, n):\n            if arr[j] < arr[min_idx]:\n                min_idx = j\n        temp = arr[i]\n        arr[i] = arr[min_idx]\n        arr[min_idx] = temp\n    return arr",
+        "java": "static void selectionSort(int[] arr) {\n    int n = arr.length;\n    for (int i = 0; i < n; i++) {\n        int minIdx = i;\n        for (int j = i + 1; j < n; j++) {\n            if (arr[j] < arr[minIdx]) {\n                minIdx = j;\n            }\n        }\n        int temp = arr[i];\n        arr[i] = arr[minIdx];\n        arr[minIdx] = temp;\n    }\n}",
+        "cpp": "void selectionSort(int arr[], int n) {\n    for (int i = 0; i < n; i++) {\n        int minIdx = i;\n        for (int j = i + 1; j < n; j++) {\n            if (arr[j] < arr[minIdx]) {\n                minIdx = j;\n            }\n        }\n        int temp = arr[i];\n        arr[i] = arr[minIdx];\n        arr[minIdx] = temp;\n    }\n}",
+        "javascript": "function selectionSort(arr) {\n    let n = arr.length;\n    for (let i = 0; i < n; i++) {\n        let minIdx = i;\n        for (let j = i + 1; j < n; j++) {\n            if (arr[j] < arr[minIdx]) {\n                minIdx = j;\n            }\n        }\n        let temp = arr[i];\n        arr[i] = arr[minIdx];\n        arr[minIdx] = temp;\n    }\n    return arr;\n}"
+    },
+    {
+        "algorithm": "two_sum",
+        "python": "def two_sum(nums, target):\n    for i in range(len(nums)):\n        for j in range(i + 1, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]\n    return []",
+        "java": "static int[] twoSum(int[] nums, int target) {\n    for (int i = 0; i < nums.length; i++) {\n        for (int j = i + 1; j < nums.length; j++) {\n            if (nums[i] + nums[j] == target) {\n                return new int[]{i, j};\n            }\n        }\n    }\n    return new int[]{};\n}",
+        "cpp": "std::vector<int> twoSum(const std::vector<int>& nums, int target) {\n    for (int i = 0; i < nums.size(); i++) {\n        for (int j = i + 1; j < nums.size(); j++) {\n            if (nums[i] + nums[j] == target) {\n                return {i, j};\n            }\n        }\n    }\n    return {};\n}",
+        "javascript": "function twoSum(nums, target) {\n    for (let i = 0; i < nums.length; i++) {\n        for (let j = i + 1; j < nums.length; j++) {\n            if (nums[i] + nums[j] === target) {\n                return [i, j];\n            }\n        }\n    }\n    return [];\n}"
+    },
+    {
+        "algorithm": "max_subarray",
+        "python": "def max_subarray(nums):\n    max_sum = nums[0]\n    curr_sum = nums[0]\n    for i in range(1, len(nums)):\n        if curr_sum < 0:\n            curr_sum = nums[i]\n        else:\n            curr_sum = curr_sum + nums[i]\n        if curr_sum > max_sum:\n            max_sum = curr_sum\n    return max_sum",
+        "java": "static int maxSubarray(int[] nums) {\n    int maxSum = nums[0];\n    int currSum = nums[0];\n    for (int i = 1; i < nums.length; i++) {\n        if (currSum < 0) {\n            currSum = nums[i];\n        } else {\n            currSum = currSum + nums[i];\n        }\n        if (currSum > maxSum) {\n            maxSum = currSum;\n        }\n    }\n    return maxSum;\n}",
+        "cpp": "int maxSubarray(const std::vector<int>& nums) {\n    int maxSum = nums[0];\n    int currSum = nums[0];\n    for (size_t i = 1; i < nums.size(); i++) {\n        if (currSum < 0) {\n            currSum = nums[i];\n        } else {\n            currSum = currSum + nums[i];\n        }\n        if (currSum > maxSum) {\n            maxSum = currSum;\n        }\n    }\n    return maxSum;\n}",
+        "javascript": "function maxSubarray(nums) {\n    let maxSum = nums[0];\n    let currSum = nums[0];\n    for (let i = 1; i < nums.length; i++) {\n        if (currSum < 0) {\n            currSum = nums[i];\n        } else {\n            currSum = currSum + nums[i];\n        }\n        if (currSum > maxSum) {\n            maxSum = currSum;\n        }\n    }\n    return maxSum;\n}"
+    },
+    {
+        "algorithm": "is_palindrome",
+        "python": "def is_palindrome(s):\n    left = 0\n    right = len(s) - 1\n    while left < right:\n        if s[left] != s[right]:\n            return False\n        left = left + 1\n        right = right - 1\n    return True",
+        "java": "static boolean isPalindrome(String s) {\n    int left = 0;\n    int right = s.length() - 1;\n    while (left < right) {\n        if (s.charAt(left) != s.charAt(right)) {\n            return false;\n        }\n        left = left + 1;\n        right = right - 1;\n    }\n    return true;\n}",
+        "cpp": "bool isPalindrome(const std::string& s) {\n    int left = 0;\n    int right = s.length() - 1;\n    while (left < right) {\n        if (s[left] != s[right]) {\n            return false;\n        }\n        left = left + 1;\n        right = right - 1;\n    }\n    return true;\n}",
+        "javascript": "function isPalindrome(s) {\n    let left = 0;\n    let right = s.length - 1;\n    while (left < right) {\n        if (s[left] !== s[right]) {\n            return false;\n        }\n        left = left + 1;\n        right = right - 1;\n    }\n    return true;\n}"
+    },
+    {
+        "algorithm": "power",
+        "python": "def power(base, exp):\n    result = 1\n    for i in range(exp):\n        result = result * base\n    return result",
+        "java": "static int power(int base, int exp) {\n    int result = 1;\n    for (int i = 0; i < exp; i++) {\n        result = result * base;\n    }\n    return result;\n}",
+        "cpp": "int power(int base, int exp) {\n    int result = 1;\n    for (int i = 0; i < exp; i++) {\n        result = result * base;\n    }\n    return result;\n}",
+        "javascript": "function power(base, exp) {\n    let result = 1;\n    for (let i = 0; i < exp; i++) {\n        result = result * base;\n    }\n    return result;\n}"
+    },
+    {
+        "algorithm": "sum_of_digits",
+        "python": "def sum_of_digits(n):\n    total = 0\n    while n > 0:\n        total = total + (n % 10)\n        n = n // 10\n    return total",
+        "java": "static int sumOfDigits(int n) {\n    int total = 0;\n    while (n > 0) {\n        total = total + (n % 10);\n        n = n / 10;\n    }\n    return total;\n}",
+        "cpp": "int sumOfDigits(int n) {\n    int total = 0;\n    while (n > 0) {\n        total = total + (n % 10);\n        n = n / 10;\n    }\n    return total;\n}",
+        "javascript": "function sumOfDigits(n) {\n    let total = 0;\n    while (n > 0) {\n        total = total + (n % 10);\n        n = Math.floor(n / 10);\n    }\n    return total;\n}"
+    },
+    {
+        "algorithm": "count_digits",
+        "python": "def count_digits(n):\n    if n == 0:\n        return 1\n    count = 0\n    while n > 0:\n        count = count + 1\n        n = n // 10\n    return count",
+        "java": "static int countDigits(int n) {\n    if (n == 0) {\n        return 1;\n    }\n    int count = 0;\n    while (n > 0) {\n        count = count + 1;\n        n = n / 10;\n    }\n    return count;\n}",
+        "cpp": "int countDigits(int n) {\n    if (n == 0) {\n        return 1;\n    }\n    int count = 0;\n    while (n > 0) {\n        count = count + 1;\n        n = n / 10;\n    }\n    return count;\n}",
+        "javascript": "function countDigits(n) {\n    if (n === 0) {\n        return 1;\n    }\n    let count = 0;\n    while (n > 0) {\n        count = count + 1;\n        n = Math.floor(n / 10);\n    }\n    return count;\n}"
+    },
+    {
+        "algorithm": "reverse_array",
+        "python": "def reverse_array(arr):\n    left = 0\n    right = len(arr) - 1\n    while left < right:\n        temp = arr[left]\n        arr[left] = arr[right]\n        arr[right] = temp\n        left = left + 1\n        right = right - 1\n    return arr",
+        "java": "static void reverseArray(int[] arr) {\n    int left = 0;\n    int right = arr.length - 1;\n    while (left < right) {\n        int temp = arr[left];\n        arr[left] = arr[right];\n        arr[right] = temp;\n        left = left + 1;\n        right = right - 1;\n    }\n}",
+        "cpp": "void reverseArray(int arr[], int n) {\n    int left = 0;\n    int right = n - 1;\n    while (left < right) {\n        int temp = arr[left];\n        arr[left] = arr[right];\n        arr[right] = temp;\n        left = left + 1;\n        right = right - 1;\n    }\n}",
+        "javascript": "function reverseArray(arr) {\n    let left = 0;\n    let right = arr.length - 1;\n    while (left < right) {\n        let temp = arr[left];\n        arr[left] = arr[right];\n        arr[right] = temp;\n        left = left + 1;\n        right = right - 1;\n    }\n    return arr;\n}"
+    }
+]
