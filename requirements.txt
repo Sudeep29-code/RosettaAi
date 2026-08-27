@@ -11,3 +11,4 @@ tqdm
 scikit-learn
 fastapi
 uvicorn
+python-dotenv
