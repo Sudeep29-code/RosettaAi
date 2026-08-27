@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,7 +122,7 @@
           <span>Engine Active</span>
         </div>
 
-        <a href="/docs" target="_blank" class="flex items-center space-x-1.5 text-xs text-slate-600 hover:text-slate-900 bg-slate-50 hover:bg-slate-100 px-3 py-1.5 rounded-xl transition border border-slate-200 font-medium">
+        <a href="https://rosettaai-2.onrender.com/docs" target="_blank" class="flex items-center space-x-1.5 text-xs text-slate-600 hover:text-slate-900 bg-slate-50 hover:bg-slate-100 px-3 py-1.5 rounded-xl transition border border-slate-200 font-medium">
           <i data-lucide="file-text" class="w-4 h-4 text-indigo-600"></i>
           <span>Swagger API</span>
         </a>
@@ -418,8 +419,9 @@ print(result)`
       document.getElementById('loadingOverlay').classList.remove('hidden');
 
       try {
+        const API_URL = "https://rosettaai-2.onrender.com";
         const endpoint = optimize ? '/optimize' : '/translate';
-        const response = await fetch(endpoint, {
+        const response = await fetch(`${API_URL}${endpoint}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
