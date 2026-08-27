@@ -9,6 +9,7 @@ for _p in [os.path.join(_base_dir, "venv", ".env"), os.path.join(_base_dir, ".en
 
 from typing import Optional, List, Dict, Any
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from translation.rosetta_engine import RosettaEngine
@@ -34,6 +35,17 @@ app = FastAPI(
         "Python, Java, C++, and JavaScript."
     ),
     version="2.0.0"
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://rosettaai-2.onrender.com"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
